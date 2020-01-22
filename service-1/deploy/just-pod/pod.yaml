@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-app
+  namespace: meetup
+  labels:
+    app: hello-app
+spec:
+  containers:
+    - name: main
+      image: registry.k3s/awsmeetup/service-1:202001221100
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 8000

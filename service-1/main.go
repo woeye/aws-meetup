@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
@@ -15,7 +16,19 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
-	r.Get("/hello", func(w http.ResponseWriter, r *http.Request) {
+	r.Get("/hello", handleHello())
+	r.Get("/bye", func(w http.ResponseWriter, r *http.Request) {
+		log.Fatalf("Oh well. Time to say goodbye!")
+	})
+
+	log.Printf("Starting service on port 8000 ...")
+	http.ListenAndServe(":8000", r)
+}
+
+func handleHello() http.HandlerFunc {
+	hostname, _ := os.Hostname()
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("Handling /hello on: %s\n", hostname)
 		resp, _ := json.Marshal(jsonMap{
 			"message": "hello world",
 		})
@@ -24,7 +37,4 @@ func main() {
 		w.WriteHeader(http.StatusOK)
 		w.Write(resp)
 	})
-
-	log.Printf("Starting service on port 8000 ...")
-	http.ListenAndServe(":8000", r)
 }

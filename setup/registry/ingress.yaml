@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: registry-ingress
+spec:
+  rules:
+    - host: registry.k3s
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: registry-service
+              servicePort: 5000

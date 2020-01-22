@@ -1,4 +1,4 @@
-module github.com/woeye/aws-demo/service-1
+module github.com/woeye/aws-demo/hello-app
 
 go 1.13
 

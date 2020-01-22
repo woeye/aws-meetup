@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hello-app-ingress
+  namespace: meetup
+spec:
+  rules:
+    - host: hello-app.k3s
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: hello-app-service
+              servicePort: 8000
