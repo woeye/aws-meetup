@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-app-deployment
+  namespace: meetup
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-app
+  template:
+    metadata:
+      labels:
+        app: hello-app
+    spec:
+      containers:
+        - name: hello-app
+          image: registry.k3s/awsmeetup/service-1:202001221732
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http-port
+              containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http-port
+            initialDelaySeconds: 5
+            periodSeconds: 10
