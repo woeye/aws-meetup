@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-app-2-service
+  namespace: meetup
+spec:
+  type: ClusterIP
+  selector:
+    app: hello-app-2
+  ports:
+  - port: 8000
+    targetPort: 8000

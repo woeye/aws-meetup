@@ -3,3 +3,5 @@
 *.code-workspace
 .idea
 service-1/hello-app
+service-1/service-1
+service-2/hello-app-2
