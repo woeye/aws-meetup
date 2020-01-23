@@ -1,0 +1,7 @@
+kubectl scale deployment.v1.apps/hello-app-deployment --replicas=4
+kubectl autoscale deployment.v1.apps/hello-app-deployment --min=2 --max=10 --cpu-percent=80
+
+k -n meetup get deployment hello-app-2-deployment -o yaml | linkerd inject - | kubectl apply -f -
+linkerd -n meetup stat deployment
+linkerd -n meetup top deploy
+linkerd dashboard
