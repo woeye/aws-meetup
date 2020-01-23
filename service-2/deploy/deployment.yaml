@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-app-2-deployment
+  namespace: meetup
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-app-2
+  template:
+    metadata:
+      labels:
+        app: hello-app-2
+    spec:
+      containers:
+        - name: hello-app-2
+          image: liprotectregistry.azurecr.io/awsmeetup/hello-app-2:202001221746
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
