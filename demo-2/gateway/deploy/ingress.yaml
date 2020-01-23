@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+  namespace: meetup
+spec:
+  rules:
+    - host: gateway.demo
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: gateway-service
+              servicePort: 5000

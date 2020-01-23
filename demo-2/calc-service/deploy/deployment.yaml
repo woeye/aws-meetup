@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calc-service-deployment
+  namespace: meetup
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: calc-service
+  template:
+    metadata:
+      labels:
+        app: calc-service
+    spec:
+      containers:
+        - name: calc-service
+          image: liprotectregistry.azurecr.io/awsmeetup/calc-service:202001231205
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
